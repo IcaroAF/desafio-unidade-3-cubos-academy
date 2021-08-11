@@ -54,7 +54,52 @@ const perfilUsuario = async (req, res) => {
  
 };
 
+const atualizaPerfilUsuario = async (req, res) => {
+    const {nome, email, senha, nome_loja} = req.body;
+    const { usuario } = req;
+
+    if(!nome){
+        return res.status(400).json("O campo nome é obrigatório");
+    }
+    if(!email){
+        return res.status(400).json("O campo email é obrigatório");
+    }
+    if(!senha){
+        return res.status(400).json("O campo senha é obrigatório");
+    }
+    if(!nome_loja){
+        return res.status(400).json("O campo nome_loja é obrigatório");
+    }
+
+    try {
+        const checaEmailQuery = 'SELECT  * FROM usuarios where email = $1';
+        const { rowCount: emailCadastrado} = await conexao.query(checaEmailQuery, [email]);
+
+        if(emailCadastrado>0){
+            return res.status(400).json("O e-mail informado já está cadastrado");
+        }
+
+        const senhaCriptografada = await bcrypt.hash(senha, 10);
+
+        const atualizaPerfil = 'UPDATE usuarios SET nome = $1, email =$2, senha = $3, nome_loja = $4 WHERE id = $5'; 
+
+        const perfilAtualizado = await conexao.query(atualizaPerfil, [nome, email, senhaCriptografada, nome_loja, usuario.id]);
+
+        if(perfilAtualizado.rowCount === 0){
+            return res.status(400).json("Não foi possível atualizar o perfil.");
+        }
+
+        return res.status(200).json("Perfil atualizado com sucesso.");
+    } catch (error) {
+        return res.status(400).json(error.message);
+    }
+
+
+};
+
+
 module.exports = {
     cadastrarUsuario,
-    perfilUsuario
+    perfilUsuario,
+    atualizaPerfilUsuario
 }

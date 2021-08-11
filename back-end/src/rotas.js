@@ -16,4 +16,7 @@ rotas.use(verificaLogin);
 //verifica perfil do usuário
 rotas.get('/perfil', usuarios.perfilUsuario);
 
+//atualiza perfil do usuário
+rotas.put('/perfil', usuarios.atualizaPerfilUsuario);
+
 module.exports = rotas;
