@@ -32,4 +32,7 @@ rotas.post('/produtos', produtos.cadastrarProduto);
 //atualiza produto do usuário
 rotas.put('/produtos/:id', produtos.atualizarProduto);
 
+//exclui produto do usuário
+rotas.delete('/produtos/:id', produtos.excluirProduto);
+
 module.exports = rotas;

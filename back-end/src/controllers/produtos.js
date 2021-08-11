@@ -91,7 +91,7 @@ const cadastrarProduto = async (req, res) => {
          const produtoExistente = await conexao.query(produtoExistenteQuery, [idProduto, usuario.id]);
 
          if(produtoExistente.rowCount === 0){
-             return res.status(404).json("A postagem não foi encontrada ou não pertence ao usuário autenticado");
+             return res.status(404).json("O produto não foi encontrado ou não pertence ao usuário autenticado");
          }
 
          const produtoQuery = "UPDATE produtos SET nome = $1, estoque = $2, categoria = $3, preco = $4, descricao = $5, imagem = $6 WHERE id = $7 AND usuario_id = $8";
@@ -106,12 +106,38 @@ const cadastrarProduto = async (req, res) => {
      } catch (error) {
          res.status(400).json(error.message);
      }
+}
 
- };
+const excluirProduto = async (req, res) => {
+    const { usuario } = req;
+    const { id } = req.params;
+
+    try {
+        const produtoExistenteQuery = 'SELECT * FROM produtos WHERE id = $1 AND usuario_id = $2';
+
+        const produtoExistente = await conexao.query(produtoExistenteQuery, [id, usuario.id]);
+
+        if(produtoExistente.rowCount === 0){
+            return res.status(404).json("O produto não foi encontrado ou não pertence ao usuário autenticado");
+        }
+
+        const { rowCount } = await conexao.query('DELETE FROM produtos WHERE id = $1', [id]);
+
+        if(rowCount === 0){
+            return res.status(400).json("Nao foi possível excluir o produto.");
+        }
+        } catch (error) {
+            return res.status(400).json(error.message);
+        }
+
+};
+
+
 
 module.exports = {
     listaProdutosUsuario,
     cadastrarProduto,
     listaProdutoUsuario,
     atualizarProduto,
+    excluirProduto
 }
