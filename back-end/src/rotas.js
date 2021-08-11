@@ -23,4 +23,7 @@ rotas.put('/perfil', usuarios.atualizaPerfilUsuario);
 //lista produtos do usuário
 rotas.get('/produtos', produtos.listaProdutosUsuario);
 
+//cadastra produto para o usuário
+rotas.post('/produtos', produtos.cadastrarProduto);
+
 module.exports = rotas;
