@@ -13,4 +13,7 @@ rotas.post('/login', login.login);
 
 rotas.use(verificaLogin);
 
+//verifica perfil do usuário
+rotas.get('/perfil', usuarios.perfilUsuario);
+
 module.exports = rotas;

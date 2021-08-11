@@ -40,6 +40,21 @@ const cadastrarUsuario = async (req, res) => {
     }
 }
 
+const perfilUsuario = async (req, res) => {
+    const { usuario } = req;
+
+    try {
+        const queryDoPerfil = 'SELECT id, nome, nome_loja, email FROM usuarios WHERE id = $1'; 
+        const perfil = await conexao.query(queryDoPerfil, [usuario.id]);
+
+        return res.status(200).json(perfil.rows[0]);
+    } catch (error) {
+        return res.status(400).json(error.message);
+    }
+ 
+};
+
 module.exports = {
     cadastrarUsuario,
+    perfilUsuario
 }
