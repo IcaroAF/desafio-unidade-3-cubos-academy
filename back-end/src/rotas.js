@@ -23,6 +23,9 @@ rotas.put('/perfil', usuarios.atualizaPerfilUsuario);
 //lista produtos do usuário
 rotas.get('/produtos', produtos.listaProdutosUsuario);
 
+//lista produto do usuário por id
+rotas.get('/produtos/:id', produtos.listaProdutoUsuario);
+
 //cadastra produto para o usuário
 rotas.post('/produtos', produtos.cadastrarProduto);
 

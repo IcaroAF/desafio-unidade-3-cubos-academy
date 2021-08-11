@@ -16,6 +16,24 @@ const listaProdutosUsuario = async (req, res) => {
     }
 };
 
+const listaProdutoUsuario = async (req, res) => {
+    const { id } = req.params;
+    const {usuario} = req;
+
+    try {
+        const produto = await conexao.query('SELECT * FROM produtos WHERE id = $1 AND usuario_id = $2', [id, usuario.id]);
+
+        if(produto.rowCount === 0){
+            return res.status(404).json("Produto não encontrado.");
+        }
+
+        return res.status(200).json(produto.rows[0]);     
+    } catch (error) {
+        res.status(400).json(error.message);
+    }
+
+};
+
 const cadastrarProduto = async (req, res) => {
     const { nome, estoque, categoria, preco, descricao,imagem } = req.body;
 
@@ -52,4 +70,5 @@ const cadastrarProduto = async (req, res) => {
 module.exports = {
     listaProdutosUsuario,
     cadastrarProduto,
+    listaProdutoUsuario,
 }
