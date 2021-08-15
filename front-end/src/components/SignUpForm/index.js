@@ -90,6 +90,10 @@ function SignUpForm({ setRequestError, setLoading }) {
             <Button type="submit" className={classes.button} variant="contained" color="primary">
                 Criar Conta
             </Button>
+            <p>
+                Já possui uma conta?
+                <a href="/">ACESSE</a>
+            </p>
         </form>
     );
 
