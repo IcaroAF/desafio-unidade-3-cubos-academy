@@ -1,10 +1,18 @@
 import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from "react-router-dom";
+import SignUp from "./pages/SignUp";
 
 function Routes() {
   return (
-    <div>
-      Olá, mundo!
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/signup" component={SignUp} />
+      </Switch>
+    </Router>
   );
 }
 
