@@ -1,20 +1,21 @@
 import React, { useContext } from 'react';
 import { Button, TextField, Typography } from '@material-ui/core/';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import PasswordInput from '../PasswordInput';
 import { formStyles } from '../../styles/formStyles';
 import { AuthContext } from '../context/AuthContext';
+import useGet from '../../Hooks/useGet';
+
 
 function LoginForm({ setRequestError, setLoading }) {
     const classes = formStyles();
     const history = useHistory();
     const { setToken } = useContext(AuthContext);
     const { handleSubmit, register, formState: { errors } } = useForm();
+    const {getProfile} = useGet();
 
     async function login(data) {
-
-        console.log(data);
 
         setRequestError('');
         setLoading(true);
@@ -36,6 +37,9 @@ function LoginForm({ setRequestError, setLoading }) {
 
         if (response.ok) {
             setToken(userData.token);
+            localStorage.setItem('token', userData.token);
+            getProfile();
+            history.push('/produtos');
             return;
         }
 
@@ -68,7 +72,7 @@ function LoginForm({ setRequestError, setLoading }) {
             </Button>
             <p>
                 Ainda não possui cadastro?
-                <a href="/signup">Cria uma conta</a>
+                <Link to="/cadastrar">Cria uma conta</Link>
             </p>
         </form>
     );

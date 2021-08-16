@@ -49,7 +49,7 @@ function Login() {
     }
 
     return (
-        <div className="signup-container">
+        <div className="login-container">
             <Card className={classes.card}>
                 <LoginForm setRequestError={setRequestError} setLoading={setLoading} />
             </Card>
