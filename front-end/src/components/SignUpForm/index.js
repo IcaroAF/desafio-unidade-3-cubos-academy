@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, TextField, Typography } from '@material-ui/core/';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import PasswordInput from '../PasswordInput';
 import { formStyles } from '../../styles/formStyles';
 
@@ -92,7 +92,7 @@ function SignUpForm({ setRequestError, setLoading }) {
             </Button>
             <p>
                 Já possui uma conta?
-                <a href="/">ACESSE</a>
+                <Link to="/">ACESSE</Link>
             </p>
         </form>
     );
