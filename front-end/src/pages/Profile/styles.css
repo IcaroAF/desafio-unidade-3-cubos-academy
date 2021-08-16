@@ -1,0 +1,6 @@
+.profile-container {
+  background-color: #b8b1b0;
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+}
