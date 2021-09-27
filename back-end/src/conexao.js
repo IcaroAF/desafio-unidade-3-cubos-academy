@@ -11,10 +11,10 @@ const { Pool } = require('pg');
 
 //config heroku
 const pool = new Pool({
-    user: 'tlqmdkowtoxczb',
-    host: 'ec2-34-197-135-44.compute-1.amazonaws.com',
+    user: 'nmraumyfybqytx',
+    host: 'ec2-34-233-0-64.compute-1.amazonaws.com',
     database: 'd2k1tvt42206ov',
-    password: '9608fde12c1e18b04675058d6e18e151b1ec8d4f331dc82c3aa584a0b52bdf63',
+    password: 'd29ccd7b6c8363dd8b20b85c8ba74a567e5c9b75cc05b0571763bebfeeb86a96',
     port: 5432,
     ssl: {
         rejectUnauthorized: false
